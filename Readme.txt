@@ -1,0 +1,1 @@
+Everything works when I tested. Hopefully things will go fine. No part1 since I implemented the function directly in the html file. Please no deduction for that. :P

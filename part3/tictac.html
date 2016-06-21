@@ -1,0 +1,54 @@
+<head>
+    <style>button { height: 50px; width: 50px; font-size: 20pt }</style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect();
+        function move(loc) {
+            socket.emit('move', {'loc':loc});
+        }
+
+        function mark(loc, mark) {
+            document.getElementById('m' + loc).innerHTML=mark;
+        }
+
+        function updateBoard(board) {
+            for (var i = 0; i < 9; i++) {
+                mark(i, board[i]);
+            }
+        }
+
+        function display(message) {
+             document.getElementById('info').innerHTML=message;
+        }
+        
+        socket.on('board', function(data) {
+            updateBoard(data.board)
+        });
+
+        socket.on('message', function(data) {
+            display(data.message);
+        });
+    </script>
+</head>
+
+<table>
+    <tr>
+        <td><button id='m0' onclick='move(0)'>X</button></td>
+        <td><button id='m1' onclick='move(1)'></button></td>
+        <td><button id='m2' onclick='move(2)'></button></td>
+    </tr>
+    <tr>
+        <td><button id='m3' onclick='move(3)'></button></td>
+        <td><button id='m4' onclick='move(4)'></button></td>
+        <td><button id='m5' onclick='move(5)'></button></td>
+    </tr>
+    <tr>
+        <td><button id='m6' onclick='move(6)'></button></td>
+        <td><button id='m7' onclick='move(7)'></button></td>
+        <td><button id='m8' onclick='move(8)'></button></td>
+    </tr>
+
+    <p id='info'>
+        hello
+    </p>
+</table>
